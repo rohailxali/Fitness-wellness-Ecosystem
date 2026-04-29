@@ -1,3 +1,5 @@
+import React from 'react';
+
 // Create placeholders for the remaining pages so routing doesn't break
 export default function Placeholder({ title }) {
   return (

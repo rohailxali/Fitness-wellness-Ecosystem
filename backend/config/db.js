@@ -1,12 +1,18 @@
 const oracledb = require('oracledb');
 require('dotenv').config();
 
+try {
+  oracledb.initOracleClient();
+} catch (err) {
+  console.error('Oracle Thick mode error (ignored if Oracle client is absent):', err);
+}
+
 oracledb.outFormat = oracledb.OUT_FORMAT_OBJECT;
 
 const dbConfig = {
-  user: process.env.DB_USER,
-  password: process.env.DB_PASSWORD,
-  connectString: process.env.DB_CONNECT_STRING,
+  user: process.env.DB_USER || 'ecosystem',
+  password: process.env.DB_PASSWORD || 'ecosystem123',
+  connectString: process.env.DB_CONNECT_STRING || 'localhost/XE',
 };
 
 async function getConnection() {

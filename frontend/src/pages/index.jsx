@@ -1,3 +1,4 @@
+import React from 'react';
 import Placeholder from './Placeholder';
 
 export const UserDetail = () => <Placeholder title="User Details" />;
