@@ -18,6 +18,7 @@ router.get('/', async (req, res) => {
 
 // GET single user
 router.get('/:id', async (req, res) => {
+  if (isNaN(req.params.id)) return res.status(400).json({ error: 'Invalid ID format' });
   try {
     const result = await db.execute(
       `SELECT u.*, a.email, a.phone, a.account_status, a.created_date
@@ -31,6 +32,7 @@ router.get('/:id', async (req, res) => {
 
 // GET user's workout plans
 router.get('/:id/workout-plans', async (req, res) => {
+  if (isNaN(req.params.id)) return res.status(400).json({ error: 'Invalid ID format' });
   try {
     const result = await db.execute(
       `SELECT uwp.uwp_id, wp.plan_name, wp.goal, wp.difficulty, wp.duration_weeks,
@@ -47,6 +49,7 @@ router.get('/:id/workout-plans', async (req, res) => {
 
 // GET user's meal plans
 router.get('/:id/meal-plans', async (req, res) => {
+  if (isNaN(req.params.id)) return res.status(400).json({ error: 'Invalid ID format' });
   try {
     const result = await db.execute(
       `SELECT ump.ump_id, mp.plan_name, mp.goal, mp.calories_per_day,
@@ -61,6 +64,7 @@ router.get('/:id/meal-plans', async (req, res) => {
 
 // GET user's progress logs
 router.get('/:id/progress', async (req, res) => {
+  if (isNaN(req.params.id)) return res.status(400).json({ error: 'Invalid ID format' });
   try {
     const result = await db.execute(
       `SELECT log_id, log_date, weight_kg, body_fat_pct, bmi, notes

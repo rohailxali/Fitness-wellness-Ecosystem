@@ -16,6 +16,7 @@ router.get('/', async (req, res) => {
 });
 
 router.get('/:id', async (req, res) => {
+  if (isNaN(req.params.id)) return res.status(400).json({ error: 'Invalid ID format' });
   try {
     const result = await db.execute(
       `SELECT t.*, a.email, a.phone, a.account_status
@@ -28,6 +29,7 @@ router.get('/:id', async (req, res) => {
 });
 
 router.get('/:id/plans', async (req, res) => {
+  if (isNaN(req.params.id)) return res.status(400).json({ error: 'Invalid ID format' });
   try {
     const wp = await db.execute(
       `SELECT workout_plan_id AS id, plan_name, goal, difficulty, duration_weeks, 'Workout' AS type

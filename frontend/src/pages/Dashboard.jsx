@@ -21,7 +21,14 @@ const Dashboard = () => {
   }, []);
 
   if (loading) return <div className="p-8 text-slate-500">Loading metrics...</div>;
-  if (!data) return <div className="p-8 text-red-500">Failed to load dashboard data. Check backend connection.</div>;
+  if (!data) return (
+    <div className="p-8">
+      <div className="bg-red-50 border border-red-200 text-red-700 p-4 rounded-lg">
+        <h3 className="font-bold mb-1">Backend Connection Failed</h3>
+        <p>Could not load dashboard data. Please ensure the Node.js backend is running and Oracle 11g is connected.</p>
+      </div>
+    </div>
+  );
 
   const stats = [
     { name: 'Total Users', value: data.counts.users, icon: Users, color: 'text-blue-600', bg: 'bg-blue-50' },
