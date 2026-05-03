@@ -8,8 +8,9 @@
 -- Or open in SQL Developer and press F5 (Run Script).
 -- ============================================================
 
+SET DEFINE OFF;
 PROMPT ============================================================
-PROMPT  Fitness & Wellness Ecosystem — Database Semester Project
+PROMPT  Fitness and Wellness Ecosystem — Database Semester Project
 PROMPT  Oracle 11g Compatible
 PROMPT ============================================================
 PROMPT

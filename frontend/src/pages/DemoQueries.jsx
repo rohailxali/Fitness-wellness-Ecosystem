@@ -25,13 +25,22 @@ const DemoQueries = () => {
 
   useEffect(() => {
     // Fetch all queries in parallel
-    Promise.all(endpoints.map(ep => api.get(ep.path).then(res => ({ id: ep.id, data: res.data }))))
+    Promise.allSettled(endpoints.map(ep => api.get(ep.path).then(res => ({ id: ep.id, data: res.data }))))
       .then(results => {
         const queryMap = {};
-        results.forEach(r => { queryMap[r.id] = r.data; });
+        results.forEach((r, idx) => { 
+          if (r.status === 'fulfilled') {
+            queryMap[r.value.id] = r.value.data; 
+          } else {
+            queryMap[endpoints[idx].id] = { title: endpoints[idx].label, rows: [{ error: 'Failed to fetch query' }] };
+          }
+        });
         setQueries(queryMap);
         setLoading(false);
-      }).catch(console.error);
+      }).catch((e) => {
+        console.error(e);
+        setLoading(false);
+      });
   }, []);
 
   if (loading) return <div className="p-8">Executing queries against Oracle 11g...</div>;

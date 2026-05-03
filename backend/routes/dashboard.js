@@ -13,13 +13,14 @@ router.get('/', async (req, res) => {
       `SELECT COUNT(*) AS CNT FROM USER_SUBSCRIPTION WHERE status='ACTIVE'`
     );
     const recentSubs = await db.execute(
-      `SELECT us.user_sub_id, u.first_name||' '||u.last_name AS full_name,
-              s.plan_name, us.start_date, us.end_date, us.status, us.amount_paid
-       FROM USER_SUBSCRIPTION us
-       JOIN APP_USER u ON u.user_id=us.user_id
-       JOIN SUBSCRIPTION s ON s.subscription_id=us.subscription_id
-       ORDER BY us.start_date DESC
-       FETCH FIRST 5 ROWS ONLY`
+      `SELECT * FROM (
+         SELECT us.user_sub_id, u.first_name||' '||u.last_name AS full_name,
+                s.plan_name, us.start_date, us.end_date, us.status, us.amount_paid
+         FROM USER_SUBSCRIPTION us
+         JOIN APP_USER u ON u.user_id=us.user_id
+         JOIN SUBSCRIPTION s ON s.subscription_id=us.subscription_id
+         ORDER BY us.start_date DESC
+       ) WHERE ROWNUM <= 5`
     );
     res.json({
       counts: {
