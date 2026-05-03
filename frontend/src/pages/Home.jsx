@@ -14,8 +14,7 @@ const Home = () => {
               <span className="ml-2 text-xl font-bold text-slate-900 tracking-tight">Fitness Ecosystem</span>
             </div>
             <div className="flex items-center space-x-4">
-              <span className="text-sm font-medium text-slate-500 hidden sm:block">Semester Project Demo</span>
-              <Link to="/app" className="btn-primary flex items-center">
+              <Link to="/login" className="btn-primary flex items-center">
                 Go to Admin <ArrowRight className="ml-2 w-4 h-4" />
               </Link>
             </div>
