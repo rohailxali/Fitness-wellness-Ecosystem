@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { Link } from 'react-router-dom';
 import api from '../api/api';
 import { User, Mail, Phone, Target, Loader, AlertCircle } from 'lucide-react';
 
@@ -13,6 +14,10 @@ const Users = () => {
       .catch(() => setError('Could not load users. Ensure the backend and Oracle DB are running.'))
       .finally(() => setLoading(false));
   }, []);
+
+  const handleAddMember = () => {
+    alert("This feature is part of the extended admin module and is not required for the current database viva demo.");
+  };
 
   if (loading) return (
     <div className="flex items-center justify-center py-24">
@@ -35,7 +40,7 @@ const Users = () => {
           <h2 className="text-2xl font-bold text-slate-900">Platform Members</h2>
           <p className="text-sm text-slate-500 mt-0.5">{users.length} members registered</p>
         </div>
-        <button className="btn-primary">Add Member</button>
+        <button onClick={handleAddMember} className="btn-primary">Add Member</button>
       </div>
 
       {users.length === 0 ? (
@@ -68,7 +73,9 @@ const Users = () => {
               </div>
 
               <div className="mt-4 pt-3 border-t border-slate-100 flex justify-end">
-                <button className="text-xs font-semibold text-brand-600 hover:text-brand-800 transition-colors">View Details →</button>
+                <Link to={`/app/users/${user.USER_ID}`} className="text-xs font-semibold text-brand-600 hover:text-brand-800 transition-colors">
+                  View Details →
+                </Link>
               </div>
             </div>
           ))}

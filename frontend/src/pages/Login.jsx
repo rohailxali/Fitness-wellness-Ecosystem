@@ -22,7 +22,8 @@ const Login = () => {
 
     setTimeout(() => {
       const user = VALID_USERS.find(
-        (u) => u.username === form.username && u.password === form.password
+        (u) => u.username.toLowerCase() === form.username.trim().toLowerCase() && 
+               u.password === form.password.trim()
       );
       if (user) {
         localStorage.setItem('fw_auth', JSON.stringify({ username: user.username, role: user.role }));

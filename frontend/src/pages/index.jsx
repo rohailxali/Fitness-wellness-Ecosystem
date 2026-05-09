@@ -1,5 +1,4 @@
-import React from 'react';
-import Placeholder from './Placeholder';
+import UserDetail from './UserDetail';
+import TrainerDetail from './TrainerDetail';
 
-export const UserDetail = () => <Placeholder title="User Details" />;
-export const TrainerDetail = () => <Placeholder title="Trainer Details" />;
+export { UserDetail, TrainerDetail };
